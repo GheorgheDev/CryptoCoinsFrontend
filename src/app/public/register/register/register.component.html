@@ -1,61 +1,105 @@
 <div class="register">
   <h1 class="register__title">Create new account</h1>
-  <form class="register__form">
-    <div class="register__field">
-      <span class="register__span">PP</span>
-      <input
-        type="text"
-        name="username"
-        placeholder="Enter username"
-        class="register__input"
-      />
+  <form
+    [formGroup]="registerForm"
+    (ngSubmit)="registerUser()"
+    class="register__form"
+  >
+    <div>
+      <div class="register__field">
+        <span class="register__span">PP</span>
+        <input
+          type="text"
+          formControlName="username"
+          placeholder="Enter username"
+          class="register__input"
+        />
+      </div>
+      <small
+        *ngIf="submitted && getControlsForm.username.errors?.required"
+        class="register__error"
+      >
+        Campo requerido
+      </small>
     </div>
-    <div class="register__field">
-      <span class="register__span">PP</span>
-      <input
-        type="text"
-        name="fullname"
-        placeholder="Enter fullname"
-        class="register__input"
-      />
+    <div>
+      <div class="register__field">
+        <span class="register__span">PP</span>
+        <input
+          type="text"
+          formControlName="fullname"
+          placeholder="Enter fullname"
+          class="register__input"
+        />
+      </div>
+      <small
+        *ngIf="submitted && getControlsForm.fullname.errors?.required"
+        class="register__error"
+      >
+        Campo requerido
+      </small>
     </div>
-    <div class="register__field">
-      <span class="register__span">PP</span>
-      <input
-        type="date"
-        name="birthdate"
-        placeholder="Enter birthdate"
-        class="register__input"
-      />
+    <div>
+      <div class="register__field">
+        <span class="register__span">PP</span>
+        <input
+          type="date"
+          formControlName="birthdate"
+          placeholder="Enter birthdate"
+          class="register__input"
+        />
+      </div>
+      <small
+        *ngIf="submitted && getControlsForm.birthdate.errors?.required"
+        class="register__error"
+      >
+        Campo requerido
+      </small>
     </div>
-    <div class="register__field">
-      <span class="register__span">PP</span>
-      <input
-        type="email"
-        name="email"
-        placeholder="Enter email"
-        class="register__input"
-      />
+    <div>
+      <div class="register__field">
+        <span class="register__span">PP</span>
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="Enter email"
+          class="register__input"
+        />
+      </div>
+      <small
+        *ngIf="submitted && getControlsForm.email.errors?.required"
+        class="register__error"
+      >
+        Campo requerido
+      </small>
+      <small
+        *ngIf="submitted && getControlsForm.email.errors?.email"
+        class="register__error"
+      >
+        No es un email valido</small
+      >
     </div>
-    <div class="register__field">
-      <span class="register__span">PP</span>
-      <input
-        type="password"
-        name="password"
-        placeholder="Enter password"
-        class="register__input"
-      />
-    </div>
-    <div class="register__field">
-      <span class="register__span">PP</span>
-      <input
-        type="number"
-        name="wallet"
-        placeholder="Enter wallet"
-        class="register__input"
-      />
+    <div>
+      <div class="register__field">
+        <span class="register__span">PP</span>
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="Enter password"
+          class="register__input"
+        />
+      </div>
+      <small
+        *ngIf="submitted && getControlsForm.password.errors?.required"
+        class="register__error"
+      >
+        Campo requerido
+      </small>
     </div>
     <button type="submit" class="register__button">Register</button>
   </form>
-  <p>Already have an account? <a href="#">Sign in</a></p>
+  <p>
+    Already have an account?
+    <a routerLink="/login" routerLinkActive="active">Sign in</a>
+  </p>
 </div>
