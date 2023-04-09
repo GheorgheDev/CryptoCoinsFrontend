@@ -25,10 +25,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      username: ['', [Validators.required]],
+      username: ['', [Validators.required]], // Validacion para que sea unico
       fullname: ['', [Validators.required]],
       birthdate: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]], // Validacion para que sea unico
       password: ['', [Validators.required]],
     })
   }
@@ -38,12 +38,12 @@ export class RegisterComponent implements OnInit {
 
     if (this.registerForm.valid) {
       this.registerService.registerUser(this.registerForm.value)
-        .subscribe(result => {
+        .subscribe(() => {
+          this.submitted = false;
+          this.registerForm.reset();
           // TODO: mostrar mensaje cuando se hace un registro
           this.route.navigate(['login']);
         })
-      this.submitted = false;
-      this.registerForm.reset();
     }
   }
 }
