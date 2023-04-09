@@ -1,25 +1,52 @@
 <div class="login">
   <h1 class="login__title">Login</h1>
-  <form class="login__form">
-    <div class="login__field">
-      <span class="login__span">PP</span>
-      <input
-        type="email"
-        name="email"
-        placeholder="Enter email"
-        class="login__input"
-      />
+  <form [formGroup]="loginForm" (ngSubmit)="login()" class="login__form">
+    <div>
+      <div class="login__field">
+        <span class="login__span">PP</span>
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="Enter email"
+          class="login__input"
+        />
+      </div>
+      <small
+        *ngIf="submitted && getFormControls.email.errors?.required"
+        class="login__error"
+      >
+        Campo requerido
+      </small>
+      <small
+        *ngIf="submitted && getFormControls.email.errors?.email"
+        class="login__error"
+      >
+        No es un email valido
+      </small>
     </div>
-    <div class="login__field">
-      <span class="login__span">PP</span>
-      <input
-        type="password"
-        name="password"
-        placeholder="Enter password"
-        class="login__input"
-      />
+    <div>
+      <div class="login__field">
+        <span class="login__span">PP</span>
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="Enter password"
+          class="login__input"
+        />
+      </div>
+      <small
+        *ngIf="submitted && getFormControls.password.errors?.required"
+        class="login__error"
+        >Campo requerido</small
+      >
     </div>
     <button type="submit" class="login__button">Login</button>
+    <small *ngIf="submitted && showErrorUserNotExist" class="login__error">
+      Email o contraseña incorrecto
+    </small>
   </form>
-  <p>Don't have an account? <a href="#">Register</a></p>
+  <p>
+    Don't have an account?
+    <a routerLink="/register">Register</a>
+  </p>
 </div>

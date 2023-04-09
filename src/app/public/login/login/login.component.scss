@@ -1,58 +1,63 @@
 .login {
-    width: 90%;
-    box-sizing: border-box;
-    border-radius: 1rem;
-    background-color: rgb(187, 187, 187);
-    margin: 10% auto;
+  width: 90%;
+  box-sizing: border-box;
+  border-radius: 1rem;
+  background-color: rgb(187, 187, 187);
+  margin: 10% auto;
+  padding: 0.4rem;
+
+  &__title {
+    text-align: center;
+  }
+
+  &__form {
     padding: 0.4rem;
-  
-    &__title {
-      text-align: center;
-    }
-  
-    &__form {
-      padding: 0.4rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-  
-    &__field {
-      width: 100%;
-      background-color: white;
-      display: flex;
-      height: 28px;
-      border-radius: 0.4rem;
-      overflow: hidden;
-    }
-  
-    &__span {
-      width: 10%;
-      box-sizing: border-box;
-      border-right: 1px solid #cac7c5;
-      background-color: #f2e9e6;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  
-    &__input {
-      width: 90%;
-      border: none;
-      outline: none;
-      padding-left: 0.4rem;
-    }
-  
-    &__button {
-      height: 28px;
-      border-radius: 0.2rem;
-      border: none;
-      cursor: pointer;
-      background-color: #367fd4;
-      color: white;
-  
-      &:hover {
-        background-color: #26578f;
-      }
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__field {
+    width: 100%;
+    background-color: white;
+    display: flex;
+    height: 28px;
+    border-radius: 0.4rem;
+    overflow: hidden;
+  }
+
+  &__span {
+    width: 10%;
+    box-sizing: border-box;
+    border-right: 1px solid #cac7c5;
+    background-color: #f2e9e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__input {
+    width: 90%;
+    border: none;
+    outline: none;
+    padding-left: 0.4rem;
+  }
+
+  &__button {
+    height: 28px;
+    border-radius: 0.2rem;
+    border: none;
+    cursor: pointer;
+    background-color: #367fd4;
+    color: white;
+
+    &:hover {
+      background-color: #26578f;
     }
   }
+
+  &__error {
+    color: red;
+    font-weight: bold;
+  }
+}
