@@ -1,0 +1,38 @@
+<div class="background background--close" #background></div>
+<dialog #modalIncreaseWallet class="modal-wallet">
+  <form
+    [formGroup]="formIncreaseWallet"
+    (ngSubmit)="increaseWallet()"
+    class="modal-wallet__form"
+  >
+    <h2 class="modal-wallet__h2">Increase your wallet</h2>
+    <div>
+      <div class="modal-wallet__field">
+        <span class="modal-wallet__span">PP</span>
+        <input
+          type="number"
+          formControlName="wallet"
+          placeholder="Enter a value"
+          class="modal-wallet__input"
+        />
+      </div>
+      <small
+        *ngIf="submitted && formIncreaseWallet.get('wallet')?.errors?.required"
+        class="modal-wallet__error"
+      >
+        Campo requerido
+      </small>
+      <!-- TODO: añadir validacion por si no es un valor valido -->
+    </div>
+    <div class="modal-wallet__buttons">
+      <button type="submit" class="modal-wallet__button">Add</button>
+      <button
+        type="button"
+        class="modal-wallet__button"
+        (click)="closeModalIncreaseWallet()"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</dialog>
