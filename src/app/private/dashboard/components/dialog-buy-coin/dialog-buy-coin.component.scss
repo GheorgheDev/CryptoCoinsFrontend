@@ -1,0 +1,73 @@
+.modal-buy-coin {
+  border-radius: 0.4rem;
+  border: 1px solid rgb(122, 122, 122);
+  margin-top: 10%;
+  background-color: gray;
+  z-index: 11;
+
+  &__h2 {
+    text-align: center;
+    margin: 0;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  &__field {
+    background-color: white;
+    display: flex;
+    height: 1.75rem;
+    border-radius: 0.4rem;
+    overflow: hidden;
+  }
+
+  &__span {
+    width: 10%;
+    box-sizing: border-box;
+    border-right: 1px solid #cac7c5;
+    background-color: #f2e9e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__input {
+    width: 90%;
+    border: none;
+    outline: none;
+    padding-left: 0.4rem;
+  }
+
+  &__error {
+    color: red;
+    font-weight: bold;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 0.2rem;
+  }
+
+  &__button {
+    width: 100%;
+    cursor: pointer;
+  }
+}
+
+.background {
+  background-color: gray;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  opacity: 0.6;
+  z-index: 10;
+
+  &--close {
+    display: none;
+  }
+}
