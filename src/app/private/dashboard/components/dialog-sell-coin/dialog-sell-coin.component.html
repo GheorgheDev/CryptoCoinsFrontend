@@ -1,0 +1,81 @@
+<div class="background background--close" #background></div>
+<dialog #modalSellCoin class="modal-sell-coin">
+  <ng-container *ngIf="coin">
+    <h2 class="modal-sell-coin__h2">Selling {{ coin.name }}</h2>
+    <div class="modal-sell-coin__content">
+      <div class="modal-sell-coin__div-image">
+        <img
+          src="{{ coin.image }}"
+          alt="coin"
+          class="modal-sell-coin__image-coin"
+        />
+      </div>
+      <div class="modal-sell-coin__stick"></div>
+      <div class="modal-sell-coin__details">
+        <div>
+          <p class="modal-sell-coin__detail">
+            <span class="modal-sell-coin__span">Value</span>:
+            {{ coin.value | number : "1.2-2" }}$
+          </p>
+          <p class="modal-sell-coin__detail">
+            <span class="modal-sell-coin__span">Stock</span>: {{ coin.stock }}
+          </p>
+          <p class="modal-sell-coin__detail">
+            <span class="modal-sell-coin__span">Amount</span>: {{ amount }}
+          </p>
+        </div>
+        <form
+          [formGroup]="formSellCoin"
+          (ngSubmit)="sellCoins()"
+          class="modal-sell-coin__form"
+        >
+          <div>
+            <div class="modal-sell-coin__field">
+              <span class="modal-sell-coin__icon">
+                <img src="./assets/icons/shopping-cart.svg" alt="money" />
+              </span>
+              <input
+                type="number"
+                formControlName="amount"
+                placeholder="Enter a quantity to sell"
+                class="modal-sell-coin__input"
+                (input)="checkInputValue()"
+              />
+            </div>
+            <div class="modal-sell-coin__errors">
+              <small
+                *ngIf="
+                  submitted && formSellCoin.get('amount')?.errors?.required
+                "
+                class="modal-sell-coin__error"
+              >
+                Field required
+              </small>
+              <small
+                *ngIf="submitted && showErrorHigherAmount"
+                class="modal-sell-coin__error"
+              >
+                The amount indicated exceeds your amount
+              </small>
+            </div>
+          </div>
+          <div class="modal-sell-coin__buttons">
+            <button
+              type="submit"
+              class="modal-sell-coin__button modal-sell-coin__button--primary"
+            >
+              Sell
+            </button>
+            <button
+              type="button"
+              class="modal-sell-coin__button modal-sell-coin__button--cancel"
+              (click)="closeModalSellCoin()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </ng-container>
+</dialog>

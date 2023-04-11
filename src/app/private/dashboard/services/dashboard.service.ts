@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 
 import { User } from 'src/app/shared/interfaces/user.interface';
 import { Coin } from 'src/app/shared/interfaces/coin.interface';
+import { Sale } from 'src/app/shared/interfaces/sale.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,11 @@ export class DashboardService {
     return this.http.get<Coin>(`/api/coins/get/${coinId}`);
   }
 
-  buyCoins(buy: any): Observable<any> {
-    return this.http.post('/api/user-coins/add', { newUserCoins: buy });
+  buyCoins(buy: Sale): Observable<number> {
+    return this.http.post<number>('/api/user-coins/add', { newUserCoins: buy });
+  }
+
+  sellCoins(buy: Sale): Observable<number> {
+    return this.http.post<number>('/api/user-coins/delete', { userCoins: buy });
   }
 }

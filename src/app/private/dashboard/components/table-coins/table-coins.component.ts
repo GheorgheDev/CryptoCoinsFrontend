@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Coin } from 'src/app/shared/interfaces/coin.interface';
 import { DashboardService } from '../../services/dashboard.service';
 import { User } from 'src/app/shared/interfaces/user.interface';
+import { DatasetSellButton } from 'src/app/shared/interfaces/datasetSellButton.interface';
 
 @Component({
   selector: 'app-table-coins',
@@ -14,7 +15,7 @@ import { User } from 'src/app/shared/interfaces/user.interface';
 })
 export class TableCoinsComponent implements OnInit, OnChanges {
   dataSource: MatTableDataSource<Coin>;
-  displayedColumns: string[] = ['Image', 'Name', 'Value', 'Stock', 'Amount', 'Buy'];
+  displayedColumns: string[] = ['Image', 'Name', 'Value', 'Stock', 'Amount', 'Buy', 'Sell'];
 
   @Input() walletUpdated: number;
   @Input() loggedUser: User;
@@ -22,6 +23,7 @@ export class TableCoinsComponent implements OnInit, OnChanges {
 
   @Output() onOpenModalBuyCoin = new EventEmitter<string>();
   @Output() onOpenModalIncreaseWallet = new EventEmitter<void>();
+  @Output() onOpenModalSellCoin = new EventEmitter<DatasetSellButton>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -61,5 +63,14 @@ export class TableCoinsComponent implements OnInit, OnChanges {
   openModalBuyCoin(event: Event) {
     const coindId = (event.target as HTMLButtonElement).dataset.coinid as string;
     this.onOpenModalBuyCoin.emit(coindId);
+  }
+
+  openModalSellCoin(event: Event) {
+    const coindId = (event.target as HTMLButtonElement).dataset.coinid as string;
+    const amount = (event.target as HTMLButtonElement).dataset.amount as string;
+    this.onOpenModalSellCoin.emit({
+      coin_id: coindId,
+      amount: amount
+    });
   }
 }
