@@ -1,5 +1,5 @@
 <div class="register">
-  <h1 class="register__title">Create new account</h1>
+  <h1 class="register__h1">Create new account</h1>
   <form
     [formGroup]="registerForm"
     (ngSubmit)="registerUser()"
@@ -7,7 +7,9 @@
   >
     <div>
       <div class="register__field">
-        <span class="register__span">PP</span>
+        <span class="register__span">
+          <img src="./assets/icons/user.svg" alt="user" />
+        </span>
         <input
           type="text"
           formControlName="username"
@@ -19,12 +21,14 @@
         *ngIf="submitted && getControlsForm.username.errors?.required"
         class="register__error"
       >
-        Campo requerido
+        Field required
       </small>
     </div>
     <div>
       <div class="register__field">
-        <span class="register__span">PP</span>
+        <span class="register__span">
+          <img src="./assets/icons/user.svg" alt="user" />
+        </span>
         <input
           type="text"
           formControlName="fullname"
@@ -36,12 +40,14 @@
         *ngIf="submitted && getControlsForm.fullname.errors?.required"
         class="register__error"
       >
-        Campo requerido
+        Field required
       </small>
     </div>
     <div>
       <div class="register__field">
-        <span class="register__span">PP</span>
+        <span class="register__span">
+          <img src="./assets/icons/date.svg" alt="date" />
+        </span>
         <input
           type="date"
           formControlName="birthdate"
@@ -53,12 +59,14 @@
         *ngIf="submitted && getControlsForm.birthdate.errors?.required"
         class="register__error"
       >
-        Campo requerido
+        Field required
       </small>
     </div>
     <div>
       <div class="register__field">
-        <span class="register__span">PP</span>
+        <span class="register__span">
+          <img src="./assets/icons/email.svg" alt="email" />
+        </span>
         <input
           type="email"
           formControlName="email"
@@ -70,18 +78,20 @@
         *ngIf="submitted && getControlsForm.email.errors?.required"
         class="register__error"
       >
-        Campo requerido
+        Field required
       </small>
       <small
         *ngIf="submitted && getControlsForm.email.errors?.email"
         class="register__error"
       >
-        No es un email valido
+        Not a valid email
       </small>
     </div>
     <div>
       <div class="register__field">
-        <span class="register__span">PP</span>
+        <span class="register__span">
+          <img src="./assets/icons/password.svg" alt="password" />
+        </span>
         <input
           type="password"
           formControlName="password"
@@ -93,13 +103,40 @@
         *ngIf="submitted && getControlsForm.password.errors?.required"
         class="register__error"
       >
-        Campo requerido
+        Field required
       </small>
+    </div>
+    <div>
+      <div class="register__field">
+        <span class="register__span">
+          <img src="./assets/icons/password.svg" alt="password" />
+        </span>
+        <input
+          type="password"
+          formControlName="repeatPassword"
+          placeholder="Repeat password"
+          class="register__input"
+        />
+      </div>
+      <div class="register__errors-repeat-password">
+        <small
+          *ngIf="submitted && getControlsForm.repeatPassword.errors?.required"
+          class="register__error"
+        >
+          Field required
+        </small>
+        <small
+          *ngIf="submitted && registerForm.errors?.notSame"
+          class="register__error"
+        >
+          Passwords do not match
+        </small>
+      </div>
     </div>
     <button type="submit" class="register__button">Register</button>
   </form>
   <p>
     Already have an account?
-    <a routerLink="/login">Sign in</a>
+    <a routerLink="/login" class="register__sign-in">Sign in</a>
   </p>
 </div>

@@ -1,13 +1,19 @@
 .register {
   width: 90%;
+  max-width: 25.75rem;
   box-sizing: border-box;
   border-radius: 1rem;
-  background-color: rgb(187, 187, 187);
-  margin: 10% auto;
+  background-color: rgb(231, 233, 235);
+  margin: 5% auto;
   padding: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  box-shadow: 0px 0px 15px -9px rgba(0, 0, 0, 1);
 
-  &__title {
+  &__h1 {
     text-align: center;
+    font-weight: bold;
   }
 
   &__form {
@@ -17,7 +23,6 @@
   }
 
   &__field {
-    width: 100%;
     display: flex;
     height: 1.75rem;
     border-radius: 0.4rem;
@@ -26,8 +31,8 @@
 
   &__span {
     width: 10%;
-    border-right: 1px solid #cac7c5;
-    background-color: #f2e9e6;
+    border-right: 1px solid #969696;
+    background-color: #bbbbbb;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -37,7 +42,8 @@
     width: 90%;
     border: none;
     outline: none;
-    padding-left: 0.4rem;
+    padding-left: 0.5rem;
+    background-color: #d4d4d4;
   }
 
   &__button {
@@ -45,16 +51,33 @@
     border-radius: 0.2rem;
     border: none;
     cursor: pointer;
-    background-color: #367fd4;
+    background-color: #2766ae;
     color: white;
+    font-weight: bold;
 
     &:hover {
-      background-color: #26578f;
+      background-color: #4a8dda;
     }
   }
 
   &__error {
-    color: red;
+    color: rgb(192, 29, 29);
     font-weight: bold;
+  }
+
+  &__errors-repeat-password {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__sign-in {
+    color: #2766ae;
+    font-weight: bold;
+    text-decoration: none;
+
+    &:hover {
+      color: #4a8dda;
+      text-decoration: underline;
+    }
   }
 }
