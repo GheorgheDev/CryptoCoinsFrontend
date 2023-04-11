@@ -13,6 +13,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DialogIncreaseWalletComponent } from './components/dialog-increase-wallet/dialog-increase-wallet.component';
 import { DialogBuyCoinComponent } from './components/dialog-buy-coin/dialog-buy-coin.component';
 import { TableCoinsComponent } from './components/table-coins/table-coins.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { DialogSellCoinComponent } from './components/dialog-sell-coin/dialog-sell-coin.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { TableCoinsComponent } from './components/table-coins/table-coins.compon
     DialogIncreaseWalletComponent,
     DialogBuyCoinComponent,
     TableCoinsComponent,
+    SpinnerComponent,
+    DialogSellCoinComponent,
   ],
   imports: [
     CommonModule,

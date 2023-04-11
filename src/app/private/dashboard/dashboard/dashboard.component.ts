@@ -5,6 +5,9 @@ import { DashboardService } from '../services/dashboard.service';
 import { User } from 'src/app/shared/interfaces/user.interface';
 import { DialogIncreaseWalletComponent } from '../components/dialog-increase-wallet/dialog-increase-wallet.component';
 import { DialogBuyCoinComponent } from '../components/dialog-buy-coin/dialog-buy-coin.component';
+import { SpinnerComponent } from '../components/spinner/spinner.component';
+import { DialogSellCoinComponent } from '../components/dialog-sell-coin/dialog-sell-coin.component';
+import { DatasetSellButton } from 'src/app/shared/interfaces/datasetSellButton.interface';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,11 +17,12 @@ import { DialogBuyCoinComponent } from '../components/dialog-buy-coin/dialog-buy
 export class DashboardComponent implements OnInit {
   loggedUser: User;
   loggedUserId: string;
-  ee: any;
+  walletUpdated: number;
 
   @ViewChild(DialogIncreaseWalletComponent) modalIncreaseWallet: DialogIncreaseWalletComponent;
   @ViewChild(DialogBuyCoinComponent) modalBuyCoin: DialogBuyCoinComponent;
-  @ViewChild('loader') loader: ElementRef;
+  @ViewChild(DialogSellCoinComponent) modalSellCoin: DialogSellCoinComponent;
+  @ViewChild(SpinnerComponent) spinner: SpinnerComponent;
   @ViewChild('dashboard') dashboard: ElementRef;
 
   constructor(
@@ -26,7 +30,7 @@ export class DashboardComponent implements OnInit {
     private dashboardService: DashboardService
   ) {
     setTimeout(() => {
-      this.loader.nativeElement.classList.add('loader--close');
+      this.spinner.closeSpinner();
       this.dashboard.nativeElement.classList.remove('dashboard--close');
     }, 1500);
   }
@@ -37,22 +41,21 @@ export class DashboardComponent implements OnInit {
       .subscribe(user => this.loggedUser = user);
   }
 
-  updateUserWallet(newUserWallet: number) {
-    this.loggedUser.wallet = newUserWallet;
-  }
-
-  update(ee: any) {
-    this.loggedUser.wallet = ee.walletUpdated;
-    this.ee = ee;
-    console.log(ee);
+  updateUserWallet(walletUpdated: number) {
+    this.loggedUser.wallet = walletUpdated;
+    this.walletUpdated = walletUpdated;
   }
 
   openModalIncreaseWallet() {
     this.modalIncreaseWallet.openModalIncreaseWallet();
   }
 
-  openModalBuyCoin(event: string) {
-    this.modalBuyCoin.openModalIncreaseWallet(event);
+  openModalBuyCoin(coinId: string) {
+    this.modalBuyCoin.openModalBuyCoin(coinId);
+  }
+
+  openModalSellCoin(datasetSellButton: DatasetSellButton) {
+    this.modalSellCoin.openModalSellCoin(datasetSellButton);
   }
 
   logout(): void {

@@ -6,33 +6,27 @@
   </app-dialog-increase-wallet>
   <app-dialog-buy-coin
     [loggedUser]="loggedUser"
-    (onUpdate)="update($event)"
+    (onUpdate)="updateUserWallet($event)"
   ></app-dialog-buy-coin>
-  <header class="dashboard__header">
-    <div class="dashboard__header-up">
-      <div>LOGO</div>
-      <button (click)="logout()">Log out</button>
-    </div>
-    <div class="dashboard__header-down">
-      <p class="dashboard__p">
-        <ng-container *ngIf="loggedUser as user">
-          Welcome {{ user.username }}
-        </ng-container>
-      </p>
-      <p class="dashboard__p">
-        <ng-container *ngIf="loggedUser as user">
-          Wallet: {{ user.wallet | number : "1.2-2" }}$
-        </ng-container>
-        <button type="button" (click)="openModalIncreaseWallet()">+</button>
-      </p>
-    </div>
+  <app-dialog-sell-coin
+    [loggedUser]="loggedUser"
+    (onUpdate)="updateUserWallet($event)"
+  ></app-dialog-sell-coin>
+  <header class="header">
+    <span>CRYPTOCOINS</span>
+    <button (click)="logout()" class="header__button-log-out" title="log out">
+      <img src="./assets/icons/logout.svg" alt="log out" />
+    </button>
   </header>
-  <main class="dashboard__main">
+  <main class="main">
     <app-table-coins
-      [ee]="ee"
+      [loggedUser]="loggedUser"
+      [walletUpdated]="walletUpdated"
       [loggedUserId]="loggedUserId"
       (onOpenModalBuyCoin)="openModalBuyCoin($event)"
+      (onOpenModalIncreaseWallet)="openModalIncreaseWallet()"
+      (onOpenModalSellCoin)="openModalSellCoin($event)"
     ></app-table-coins>
   </main>
 </div>
-<span class="loader" #loader></span>
+<app-spinner></app-spinner>
