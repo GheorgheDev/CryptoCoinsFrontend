@@ -1,9 +1,11 @@
 <div class="login">
-  <h1 class="login__title">Login</h1>
-  <form [formGroup]="loginForm" (ngSubmit)="login()" class="login__form">
+  <h1 class="login__h1">Sign in</h1>
+  <form [formGroup]="loginForm" (ngSubmit)="signIn()" class="login__form">
     <div>
       <div class="login__field">
-        <span class="login__span">PP</span>
+        <span class="login__span">
+          <img src="./assets/icons/email.svg" alt="email" />
+        </span>
         <input
           type="email"
           formControlName="email"
@@ -15,18 +17,20 @@
         *ngIf="submitted && getFormControls.email.errors?.required"
         class="login__error"
       >
-        Campo requerido
+        Field required
       </small>
       <small
         *ngIf="submitted && getFormControls.email.errors?.email"
         class="login__error"
       >
-        No es un email valido
+        Not a valid email
       </small>
     </div>
     <div>
       <div class="login__field">
-        <span class="login__span">PP</span>
+        <span class="login__span">
+          <img src="./assets/icons/password.svg" alt="password" />
+        </span>
         <input
           type="password"
           formControlName="password"
@@ -37,16 +41,17 @@
       <small
         *ngIf="submitted && getFormControls.password.errors?.required"
         class="login__error"
-        >Campo requerido</small
       >
+        Field required
+      </small>
     </div>
     <button type="submit" class="login__button">Login</button>
-    <small *ngIf="submitted && showErrorUserNotExist" class="login__error">
-      Email o contraseña incorrecto
-    </small>
+    <p *ngIf="submitted && showErrorUserNotExist" class="login__error login__error--center">
+      Incorrect email or password
+    </p>
   </form>
   <p>
     Don't have an account?
-    <a routerLink="/register">Register</a>
+    <a routerLink="/register" class="login__register">Register</a>
   </p>
 </div>

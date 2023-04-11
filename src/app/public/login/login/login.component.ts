@@ -12,7 +12,7 @@ import { LoginService } from '../services/login.service';
 })
 export class LoginComponent implements OnInit {
   submitted: boolean = false;
-  showErrorUserNotExist: boolean = false;
+  showErrorUserNotExist: boolean = false; // TODO: añadir como validación personalizada
   loginForm: FormGroup;
 
   constructor(
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  login(): void {
+  signIn(): void {
     this.submitted = true;
 
     if (this.loginForm.valid) {
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
           }
 
           this.showErrorUserNotExist = false;
-          sessionStorage.setItem('userId', user.user_id || ''); // TODO: mejorar esto
+          sessionStorage.setItem('userId', user.user_id || '');
           this.route.navigate(['dashboard']);
         })
     }
