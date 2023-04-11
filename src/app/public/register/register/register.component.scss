@@ -3,7 +3,7 @@
   max-width: 25.75rem;
   box-sizing: border-box;
   border-radius: 1rem;
-  background-color: rgb(231, 233, 235);
+  background-color: var(--bg-primary);
   margin: 5% auto;
   padding: 0.6rem;
   display: flex;
@@ -51,17 +51,17 @@
     border-radius: 0.2rem;
     border: none;
     cursor: pointer;
-    background-color: #2766ae;
+    background-color: var(--bg-button-primary);
     color: white;
     font-weight: bold;
 
     &:hover {
-      background-color: #4a8dda;
+      background-color: var(--bg-button-primary-hover);
     }
   }
 
   &__error {
-    color: rgb(192, 29, 29);
+    color: var(--color-error-primary);
     font-weight: bold;
   }
 
@@ -71,12 +71,12 @@
   }
 
   &__sign-in {
-    color: #2766ae;
+    color: var(--color-link-primary);
     font-weight: bold;
     text-decoration: none;
 
     &:hover {
-      color: #4a8dda;
+      color: var(--color-link-primary-hover);
       text-decoration: underline;
     }
   }
