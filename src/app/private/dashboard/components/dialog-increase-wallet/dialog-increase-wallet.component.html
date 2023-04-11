@@ -8,7 +8,9 @@
     <h2 class="modal-wallet__h2">Increase your wallet</h2>
     <div>
       <div class="modal-wallet__field">
-        <span class="modal-wallet__span">PP</span>
+        <span class="modal-wallet__span">
+          <img src="./assets/icons/money.svg" alt="log out" />
+        </span>
         <input
           type="number"
           formControlName="wallet"
@@ -20,15 +22,20 @@
         *ngIf="submitted && formIncreaseWallet.get('wallet')?.errors?.required"
         class="modal-wallet__error"
       >
-        Campo requerido
+        Field required
       </small>
       <!-- TODO: añadir validacion por si no es un valor valido -->
     </div>
     <div class="modal-wallet__buttons">
-      <button type="submit" class="modal-wallet__button">Add</button>
+      <button
+        type="submit"
+        class="modal-wallet__button modal-wallet__button--primary"
+      >
+        Add
+      </button>
       <button
         type="button"
-        class="modal-wallet__button"
+        class="modal-wallet__button modal-wallet__button--cancel"
         (click)="closeModalIncreaseWallet()"
       >
         Cancel

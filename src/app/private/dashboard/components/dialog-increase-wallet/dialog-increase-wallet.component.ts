@@ -10,9 +10,10 @@ import { User } from 'src/app/shared/interfaces/user.interface';
   styleUrls: ['./dialog-increase-wallet.component.scss']
 })
 export class DialogIncreaseWalletComponent implements OnInit {
-  @Input() loggedUser: User;
   formIncreaseWallet: FormGroup;
   submitted: boolean = false;
+
+  @Input() loggedUser: User;
 
   @Output() onUpdateUserWallet = new EventEmitter<number>();
 
@@ -30,6 +31,18 @@ export class DialogIncreaseWalletComponent implements OnInit {
     })
   }
 
+  openModalIncreaseWallet() {
+    this.backround.nativeElement.classList.remove('background--close');
+    this.modalIncreaseWallet.nativeElement.setAttribute('open', '');
+  }
+
+  closeModalIncreaseWallet() {
+    this.backround.nativeElement.classList.add('background--close');
+    this.modalIncreaseWallet.nativeElement.removeAttribute('open');
+    this.submitted = false;
+    this.formIncreaseWallet.reset();
+  }
+
   increaseWallet() {
     this.submitted = true;
 
@@ -42,17 +55,5 @@ export class DialogIncreaseWalletComponent implements OnInit {
           this.closeModalIncreaseWallet();
         })
     }
-  }
-
-  openModalIncreaseWallet() {
-    this.backround.nativeElement.classList.remove('background--close');
-    this.modalIncreaseWallet.nativeElement.setAttribute('open', '');
-  }
-
-  closeModalIncreaseWallet() {
-    this.backround.nativeElement.classList.add('background--close');
-    this.modalIncreaseWallet.nativeElement.removeAttribute('open');
-    this.submitted = false;
-    this.formIncreaseWallet.reset();
   }
 }

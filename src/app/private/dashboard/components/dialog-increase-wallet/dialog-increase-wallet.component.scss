@@ -1,23 +1,38 @@
+.background {
+  background-color: gray;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  opacity: 0.6;
+  z-index: 99;
+
+  &--close {
+    display: none;
+  }
+}
+
 .modal-wallet {
   border-radius: 0.4rem;
-  border: 1px solid rgb(122, 122, 122);
+  border: none;
+  background-color: var(--bg-primary);
   margin-top: 10%;
-  background-color: gray;
-  z-index: 12;
-
-  &__h2 {
-    text-align: center;
-    margin: 0;
-  }
+  z-index: 100;
 
   &__form {
     display: flex;
     flex-direction: column;
-    gap: 0.7rem;
+    gap: 1rem;
+  }
+
+  &__h2 {
+    text-align: center;
+    font-weight: bold;
+    margin: 0;
   }
 
   &__field {
-    background-color: white;
     display: flex;
     height: 1.75rem;
     border-radius: 0.4rem;
@@ -25,24 +40,24 @@
   }
 
   &__span {
-    width: 10%;
-    box-sizing: border-box;
-    border-right: 1px solid #cac7c5;
-    background-color: #f2e9e6;
+    width: 15%;
+    border-right: 1px solid #969696;
+    background-color: #bbbbbb;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   &__input {
-    width: 90%;
+    width: 85%;
     border: none;
     outline: none;
-    padding-left: 0.4rem;
+    padding-left: 0.5rem;
+    background-color: #d4d4d4;
   }
 
   &__error {
-    color: red;
+    color: var(--color-error-primary);
     font-weight: bold;
   }
 
@@ -53,21 +68,27 @@
 
   &__button {
     width: 100%;
+    border-radius: 0.2rem;
+    border: none;
     cursor: pointer;
-  }
-}
+    color: white;
+    font-weight: bold;
+    padding: 0.3rem 0.8rem;
 
-.background {
-  background-color: gray;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  opacity: 0.6;
-  z-index: 10;
+    &--primary {
+      background-color: var(--bg-button-primary);
 
-  &--close {
-    display: none;
+      &:hover {
+        background-color: var(--bg-button-primary-hover);
+      }
+    }
+
+    &--cancel {
+      background-color: var(--bg-button-cancel);
+
+      &:hover {
+        background-color: var(--bg-button-cancel-hover);
+      }
+    }
   }
 }
