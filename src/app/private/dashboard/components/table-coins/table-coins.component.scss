@@ -1,3 +1,68 @@
-table {
-  width: 100%;
+.main {
+  &__content {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__filter {
+    background-color: #424242;
+    padding: 0.8rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  &__wallet-user {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    font-size: 1.2em;
+    color: white;
+  }
+
+  &__button-increase-wallet {
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: rgb(154, 154, 154);
+    }
+  }
+
+  &__table {
+    width: 100%;
+  }
+
+  &__image-coin {
+    width: 3.125rem;
+    height: 3.125rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__button {
+    border-radius: 0.2rem;
+    border: none;
+    cursor: pointer;
+    background-color: var(--bg-button-primary);
+    color: white;
+    font-weight: bold;
+    padding: 0.3rem 0.8rem;
+    box-sizing: border-box;
+
+    &:hover {
+      background-color: var(--bg-button-primary-hover);
+    }
+  }
 }

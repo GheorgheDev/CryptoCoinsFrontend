@@ -1,5 +1,5 @@
-<div>
-  <div class="">
+<div class="main__content">
+  <div class="main__filter">
     <mat-form-field appearance="standard">
       <mat-label>Filter</mat-label>
       <input
@@ -9,10 +9,30 @@
         #input
       />
     </mat-form-field>
+    <p class="main__wallet-user">
+      <ng-container *ngIf="loggedUser as user">
+        Wallet: {{ user.wallet | number : "1.2-2" }}$
+      </ng-container>
+      <button
+        type="button"
+        (click)="openModalIncreaseWallet()"
+        class="main__button-increase-wallet"
+        title="increase your wallet"
+      >
+        <img src="./assets/icons/add.svg" alt="add" />
+      </button>
+    </p>
   </div>
 
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" class="">
+    <table mat-table [dataSource]="dataSource" class="main__table">
+      <ng-container matColumnDef="Image">
+        <th mat-header-cell *matHeaderCellDef>Image</th>
+        <td mat-cell *matCellDef="let row">
+          <img src="{{ row.image }}" alt="coin" class="main__image-coin" />
+        </td>
+      </ng-container>
+
       <ng-container matColumnDef="Name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
         <td mat-cell *matCellDef="let row">{{ row.name }}</td>
@@ -20,24 +40,23 @@
 
       <ng-container matColumnDef="Value">
         <th mat-header-cell *matHeaderCellDef>Value</th>
-        <td mat-cell *matCellDef="let row">{{ row.value }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="Image">
-        <th mat-header-cell *matHeaderCellDef>Image</th>
-        <td mat-cell *matCellDef="let row">{{ row.image }}</td>
+        <td mat-cell *matCellDef="let row">
+          {{ row.value | number : "1.2-2" }}$
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="Stock">
         <th mat-header-cell *matHeaderCellDef>Stock</th>
         <td mat-cell *matCellDef="let row">
-          {{ row.stock === "0" ? "Sin stock" : row.stock }}
+          <span [ngStyle]="{ color: row.stock === '0' ? 'red' : 'white' }">
+            {{ row.stock === "0" ? "Sin stock" : (row.stock | number) }}</span
+          >
         </td>
       </ng-container>
 
       <ng-container matColumnDef="Amount">
         <th mat-header-cell *matHeaderCellDef>Amount</th>
-        <td mat-cell *matCellDef="let row">{{ row.amount || 0 }}</td>
+        <td mat-cell *matCellDef="let row">{{ row.amount || 0 | number }}</td>
       </ng-container>
 
       <ng-container matColumnDef="Buy">
@@ -48,6 +67,7 @@
             type="button"
             attr.data-coinid="{{ row.coin_id }}"
             (click)="openModalBuyCoin($event)"
+            class="main__button"
           >
             Buy
           </button>

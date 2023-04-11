@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { Coin } from 'src/app/shared/interfaces/coin.interface';
 import { DashboardService } from '../../services/dashboard.service';
+import { User } from 'src/app/shared/interfaces/user.interface';
 
 @Component({
   selector: 'app-table-coins',
@@ -12,27 +13,28 @@ import { DashboardService } from '../../services/dashboard.service';
   styleUrls: ['./table-coins.component.scss']
 })
 export class TableCoinsComponent implements OnInit, OnChanges {
-  @Input() ee: any;
   dataSource: MatTableDataSource<Coin>;
-  displayedColumns: string[] = ['Name', 'Value', 'Image', 'Stock', 'Amount', 'Buy'];
+  displayedColumns: string[] = ['Image', 'Name', 'Value', 'Stock', 'Amount', 'Buy'];
 
+  @Input() walletUpdated: number;
+  @Input() loggedUser: User;
   @Input() loggedUserId: string;
-  @Output() onOpenModalBuyCoin = new EventEmitter<string>();
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @Output() onOpenModalBuyCoin = new EventEmitter<string>();
+  @Output() onOpenModalIncreaseWallet = new EventEmitter<void>();
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private dashboardService: DashboardService
   ) { }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.ee) {
-      this.dashboardService.getAllCoinsWithUserCoins(this.loggedUserId)
+  ngOnChanges(_changes: SimpleChanges) {
+    this.dashboardService.getAllCoinsWithUserCoins(this.loggedUserId)
       .subscribe(coins => {
         this.dataSource = new MatTableDataSource(coins);
         this.dataSource.paginator = this.paginator;
       })
-    }
   }
 
   ngOnInit(): void {
@@ -41,6 +43,10 @@ export class TableCoinsComponent implements OnInit, OnChanges {
         this.dataSource = new MatTableDataSource(coins);
         this.dataSource.paginator = this.paginator;
       })
+  }
+
+  openModalIncreaseWallet() {
+    this.onOpenModalIncreaseWallet.emit();
   }
 
   applyFilter(event: Event): void {
@@ -54,6 +60,6 @@ export class TableCoinsComponent implements OnInit, OnChanges {
 
   openModalBuyCoin(event: Event) {
     const coindId = (event.target as HTMLButtonElement).dataset.coinid as string;
-    this.onOpenModalBuyCoin.emit(coindId)
+    this.onOpenModalBuyCoin.emit(coindId);
   }
 }
