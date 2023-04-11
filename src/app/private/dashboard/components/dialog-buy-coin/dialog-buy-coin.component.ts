@@ -18,7 +18,8 @@ export class DialogBuyCoinComponent implements OnInit {
   showErrorHigherAmount: boolean = false;
 
   @Input() loggedUser: User;
-  @Output() onUpdate = new EventEmitter<any>();
+
+  @Output() onUpdate = new EventEmitter<number>();
 
   @ViewChild('modalBuyCoin') modalBuyCoin: ElementRef;
   @ViewChild('background') backround: ElementRef;
@@ -34,8 +35,8 @@ export class DialogBuyCoinComponent implements OnInit {
     })
   }
 
-  openModalIncreaseWallet(coindId: string) {
-    this.getCoinById(coindId);
+  openModalBuyCoin(coindId: string) {
+    this.getCoinById(coindId); // Problemas de rendimiento
     this.backround.nativeElement.classList.remove('background--close');
     this.modalBuyCoin.nativeElement.setAttribute('open', '');
   }
@@ -55,16 +56,17 @@ export class DialogBuyCoinComponent implements OnInit {
   }
 
   checkInputValue(): boolean {
-    const userWallet = this.loggedUser.wallet;
-    const coinValue = this.coin.value;
+    const userWallet: number = this.loggedUser.wallet;
+    const coinValue: number = this.coin.value;
     const amount: number = this.formBuyCoin.get('amount')?.value;
+    const coinStock: number = this.coin.stock;
 
     if (userWallet < coinValue || userWallet < (coinValue * amount)) {
       this.showErrorNotEnoughMoney = true;
       return false;
     }
 
-    if (amount > this.coin.stock) {
+    if (amount > coinStock) {
       this.showErrorHigherAmount = true;
       return false;
     }
@@ -77,28 +79,29 @@ export class DialogBuyCoinComponent implements OnInit {
 
   buyCoins() {
     this.submitted = true;
-    const userWallet = this.loggedUser.wallet;
-    const coinValue = this.coin.value;
+    const userWallet: number = this.loggedUser.wallet;
+    const coinValue: number = this.coin.value;
     const amount: number = this.formBuyCoin.get('amount')?.value;
-    let walletTotal = 0;
-    let stockTotal = 0;
+    const coinStock: number = this.coin.stock;
+    let walletUpdated = 0;
+    let stockUpdated = 0;
 
     if (this.formBuyCoin.valid && this.checkInputValue()) {
       this.showErrorNotEnoughMoney = false;
       this.showErrorHigherAmount = false;
 
-      walletTotal = userWallet - (coinValue * amount);
-      stockTotal = this.coin.stock - amount;
+      walletUpdated = userWallet - (coinValue * amount);
+      stockUpdated = coinStock - amount;
 
       this.dashboardService.buyCoins({
-        user_id: this.loggedUser.user_id,
+        user_id: this.loggedUser.user_id || '',
         coin_id: this.coin.coin_id,
         amount: amount,
-        wallet: walletTotal,
-        stock: stockTotal
+        wallet: walletUpdated,
+        stock: stockUpdated
       })
-        .subscribe((result) => {
-          this.onUpdate.emit(result);
+        .subscribe((walletUpdated: number) => {
+          this.onUpdate.emit(walletUpdated);
           this.closeModalBuyCoin();
         })
     }

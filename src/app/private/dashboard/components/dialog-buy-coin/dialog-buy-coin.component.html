@@ -1,55 +1,82 @@
 <div class="background background--close" #background></div>
 <dialog #modalBuyCoin class="modal-buy-coin">
-  <form
-    [formGroup]="formBuyCoin"
-    (ngSubmit)="buyCoins()"
-    class="modal-buy-coin__form"
-  >
-    <h2 class="modal-buy-coin__h2">Buying {{ coin?.name }}</h2>
-    <div>
-      <div>imagen {{ coin?.image }}</div>
-      <div>precio {{ coin?.value }}</div>
-      <div>stock {{ coin?.stock }}</div>
-    </div>
-    <div>
-      <div class="modal-buy-coin__field">
-        <span class="modal-buy-coin__span">PP</span>
-        <input
-          type="number"
-          formControlName="amount"
-          placeholder="Enter a value"
-          class="modal-buy-coin__input"
-          (input)="checkInputValue()"
+  <ng-container *ngIf="coin">
+    <h2 class="modal-buy-coin__h2">Buying {{ coin.name }}</h2>
+    <div class="modal-buy-coin__content">
+      <div class="modal-buy-coin__div-image">
+        <img
+          src="{{ coin.image }}"
+          alt="coin"
+          class="modal-buy-coin__image-coin"
         />
       </div>
-      <small
-        *ngIf="submitted && formBuyCoin.get('amount')?.errors?.required"
-        class="modal-buy-coin__error"
-      >
-        Campo requerido
-      </small>
-      <small
-        *ngIf="submitted && showErrorNotEnoughMoney"
-        class="modal-buy-coin__error"
-      >
-        No tienes suficiente dinero
-      </small>
-      <small
-        *ngIf="submitted && showErrorHigherAmount"
-        class="modal-buy-coin__error"
-      >
-        Tu cantidad superar al stock del producto
-      </small>
+      <div class="modal-buy-coin__stick"></div>
+      <div class="modal-buy-coin__details">
+        <div>
+          <p class="modal-buy-coin__detail">
+            <span class="modal-buy-coin__span">Value</span>:
+            {{ coin.value | number : "1.2-2" }}$
+          </p>
+          <p class="modal-buy-coin__detail">
+            <span class="modal-buy-coin__span">Stock</span>: {{ coin.stock }}
+          </p>
+        </div>
+        <form
+          [formGroup]="formBuyCoin"
+          (ngSubmit)="buyCoins()"
+          class="modal-buy-coin__form"
+        >
+          <div>
+            <div class="modal-buy-coin__field">
+              <span class="modal-buy-coin__icon">
+                <img src="./assets/icons/shopping-cart.svg" alt="money" />
+              </span>
+              <input
+                type="number"
+                formControlName="amount"
+                placeholder="Enter a quantity"
+                class="modal-buy-coin__input"
+                (input)="checkInputValue()"
+              />
+            </div>
+            <div class="modal-buy-coin__errors">
+              <small
+                *ngIf="submitted && formBuyCoin.get('amount')?.errors?.required"
+                class="modal-buy-coin__error"
+              >
+                Field required
+              </small>
+              <small
+                *ngIf="submitted && showErrorNotEnoughMoney"
+                class="modal-buy-coin__error"
+              >
+                You don't have enough money
+              </small>
+              <small
+                *ngIf="submitted && showErrorHigherAmount"
+                class="modal-buy-coin__error"
+              >
+                Your quantity exceeds the product stock
+              </small>
+            </div>
+          </div>
+          <div class="modal-buy-coin__buttons">
+            <button
+              type="submit"
+              class="modal-buy-coin__button modal-buy-coin__button--primary"
+            >
+              Buy
+            </button>
+            <button
+              type="button"
+              class="modal-buy-coin__button modal-buy-coin__button--cancel"
+              (click)="closeModalBuyCoin()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-    <div class="modal-buy-coin__buttons">
-      <button type="submit" class="modal-buy-coin__button">Add</button>
-      <button
-        type="button"
-        class="modal-buy-coin__button"
-        (click)="closeModalBuyCoin()"
-      >
-        Cancel
-      </button>
-    </div>
-  </form>
+  </ng-container>
 </dialog>
