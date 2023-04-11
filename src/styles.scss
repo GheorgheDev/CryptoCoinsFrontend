@@ -2,6 +2,8 @@
   --bg-primary: rgb(231, 233, 235);
   --bg-button-primary: #2766ae;
   --bg-button-primary-hover: #4a8dda;
+  --bg-button-cancel: rgb(188, 31, 31);
+  --bg-button-cancel-hover: rgb(227, 77, 77);
   --color-link-primary: #2766ae;
   --color-link-primary-hover: #4a8dda;
   --color-error-primary: rgb(192, 29, 29);
@@ -12,7 +14,6 @@ html {
   background-image: url("./assets/images/dvn6.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
 }
 
 body {
