@@ -60,14 +60,14 @@
     }
   }
 
+  &__errors {
+    display: flex;
+    flex-direction: column;
+  }
+
   &__error {
     color: var(--color-error-primary);
     font-weight: bold;
-  }
-
-  &__errors-repeat-password {
-    display: flex;
-    flex-direction: column;
   }
 
   &__sign-in {

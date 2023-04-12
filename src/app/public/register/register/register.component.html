@@ -99,12 +99,21 @@
           class="register__input"
         />
       </div>
-      <small
-        *ngIf="submitted && getControlsForm.password.errors?.required"
-        class="register__error"
-      >
-        Field required
-      </small>
+      <div class="register__errors">
+        <small
+          *ngIf="submitted && getControlsForm.password.errors?.required"
+          class="register__error"
+        >
+          Field required
+        </small>
+        <small
+          *ngIf="submitted && getControlsForm.password.errors?.pattern"
+          class="register__error"
+        >
+          The password must be at least 8 characters long and contain at least
+          one letter and one number
+        </small>
+      </div>
     </div>
     <div>
       <div class="register__field">
@@ -118,7 +127,7 @@
           class="register__input"
         />
       </div>
-      <div class="register__errors-repeat-password">
+      <div class="register__errors">
         <small
           *ngIf="submitted && getControlsForm.repeatPassword.errors?.required"
           class="register__error"

@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
       fullname: ['', [Validators.required]],
       birthdate: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]], // Validacion para que sea unico
-      password: ['', [Validators.required]], // Validación más restrictiva con las contraseñas
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)]],
       repeatPassword: ['', Validators.required]
     },
       {
@@ -50,7 +50,6 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       this.registerService.registerUser(this.registerForm.value)
         .subscribe(() => {
-          // TODO: mostrar mensaje de que te has registrado
           this.submitted = false;
           this.registerForm.reset();
           this.route.navigate(['login']);
