@@ -38,7 +38,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.loggedUserId = sessionStorage.getItem('userId') || '';
     this.dashboardService.getUserById(this.loggedUserId)
-      .subscribe(user => this.loggedUser = user);
+      .subscribe(user => {
+        this.loggedUser = user;
+      });
   }
 
   updateUserWallet(walletUpdated: number) {

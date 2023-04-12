@@ -3,10 +3,11 @@ import { Component, OnInit, ViewChild, Input, Output, EventEmitter, SimpleChange
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
-import { Coin } from 'src/app/shared/interfaces/coin.interface';
 import { DashboardService } from '../../services/dashboard.service';
 import { User } from 'src/app/shared/interfaces/user.interface';
 import { DatasetSellButton } from 'src/app/shared/interfaces/datasetSellButton.interface';
+import { Coin } from 'src/app/shared/interfaces/coin.interface';
+import { UserCoins } from 'src/app/shared/interfaces/userCoins.interface';
 
 @Component({
   selector: 'app-table-coins',
@@ -32,17 +33,29 @@ export class TableCoinsComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnChanges(_changes: SimpleChanges) {
-    this.dashboardService.getAllCoinsWithUserCoins(this.loggedUserId)
-      .subscribe(coins => {
-        this.dataSource = new MatTableDataSource(coins);
-        this.dataSource.paginator = this.paginator;
+    this.dashboardService.getAllUserCoins(this.loggedUserId)
+      .subscribe(result => {
+        this.getAllCoinsWithAmount(result);
       })
   }
 
   ngOnInit(): void {
-    this.dashboardService.getAllCoinsWithUserCoins(this.loggedUserId)
+    this.dashboardService.getAllUserCoins(this.loggedUserId)
+      .subscribe(listUserCoins => {
+        this.getAllCoinsWithAmount(listUserCoins);
+      })
+  }
+
+  getAllCoinsWithAmount(listUserCoins: UserCoins[]) {
+    this.dashboardService.getAllCoins()
       .subscribe(coins => {
-        this.dataSource = new MatTableDataSource(coins);
+        const allCoinsWithAmount: Coin[] = coins.map((coin) => {
+          const userCoin = listUserCoins.find((coinUser: UserCoins) => coinUser.coin_id === coin.coin_id);
+          userCoin ? coin["amount"] = userCoin.amount : coin["amount"] = 0;
+          return coin;
+        });
+
+        this.dataSource = new MatTableDataSource(allCoinsWithAmount);
         this.dataSource.paginator = this.paginator;
       })
   }
