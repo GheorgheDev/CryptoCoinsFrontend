@@ -4,5 +4,5 @@ export interface Coin {
     value: number;
     image: string;
     stock: number;
-    amount: number;
+    amount?: number;
 }
