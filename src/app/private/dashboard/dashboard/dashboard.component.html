@@ -13,10 +13,28 @@
     (onUpdate)="updateUserWallet($event)"
   ></app-dialog-sell-coin>
   <header class="header">
-    <span>CRYPTOCOINS</span>
-    <button (click)="logout()" class="header__button-log-out" title="log out">
-      <img src="./assets/icons/logout.svg" alt="log out" />
-    </button>
+    <div class="header__top">
+      <h1 class="header__logo">𝐂𝐑𝐘𝐏𝐓𝐎𝐊𝐈𝐍𝐆𝐃𝐎𝐌</h1>
+      <button (click)="logout()" class="header__button-log-out" title="log out">
+        <img src="./assets/icons/logout.svg" alt="log out" />
+      </button>
+    </div>
+    <div class="header__lower">
+      <p>Welcome {{ loggedUser?.username }}</p>
+      <p class="header__wallet-user">
+        <ng-container *ngIf="loggedUser as user">
+          Wallet: {{ user.wallet | number : "1.2-2" }}€
+        </ng-container>
+        <button
+          type="button"
+          (click)="openModalIncreaseWallet()"
+          class="header__button-increase-wallet"
+          title="increase your wallet"
+        >
+          <img src="./assets/icons/add.svg" alt="add" />
+        </button>
+      </p>
+    </div>
   </header>
   <main class="main">
     <app-table-coins

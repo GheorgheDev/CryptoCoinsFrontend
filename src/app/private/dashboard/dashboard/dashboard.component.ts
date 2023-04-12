@@ -52,8 +52,8 @@ export class DashboardComponent implements OnInit {
     this.modalIncreaseWallet.openModalIncreaseWallet();
   }
 
-  openModalBuyCoin(coinId: string) {
-    this.modalBuyCoin.openModalBuyCoin(coinId);
+  openModalBuyCoin(datasetSellButton: DatasetSellButton) {
+    this.modalBuyCoin.openModalBuyCoin(datasetSellButton);
   }
 
   openModalSellCoin(datasetSellButton: DatasetSellButton) {

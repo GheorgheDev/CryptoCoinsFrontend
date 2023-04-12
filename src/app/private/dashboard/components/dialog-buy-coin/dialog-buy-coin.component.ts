@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DashboardService } from './../../services/dashboard.service';
 import { Coin } from 'src/app/shared/interfaces/coin.interface';
 import { User } from 'src/app/shared/interfaces/user.interface';
+import { DatasetSellButton } from 'src/app/shared/interfaces/datasetSellButton.interface';
 
 @Component({
   selector: 'app-dialog-buy-coin',
@@ -16,6 +17,7 @@ export class DialogBuyCoinComponent implements OnInit {
   formBuyCoin: FormGroup;
   showErrorNotEnoughMoney: boolean = false;
   showErrorHigherAmount: boolean = false;
+  amount: string;
 
   @Input() loggedUser: User;
 
@@ -35,8 +37,11 @@ export class DialogBuyCoinComponent implements OnInit {
     })
   }
 
-  openModalBuyCoin(coindId: string) {
-    this.getCoinById(coindId); // Problemas de rendimiento
+  openModalBuyCoin(datasetSellButton: DatasetSellButton) {
+    const { coin_id, amount } = datasetSellButton;
+
+    this.amount = amount;
+    this.getCoinById(coin_id); // Problemas de rendimiento
     this.backround.nativeElement.classList.remove('background--close');
     this.modalBuyCoin.nativeElement.setAttribute('open', '');
   }

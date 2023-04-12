@@ -15,10 +15,13 @@
         <div>
           <p class="modal-buy-coin__detail">
             <span class="modal-buy-coin__span">Value</span>:
-            {{ coin.value | number : "1.2-2" }}$
+            {{ coin.value | number : "1.2-2" }}€
           </p>
           <p class="modal-buy-coin__detail">
             <span class="modal-buy-coin__span">Stock</span>: {{ coin.stock }}
+          </p>
+          <p class="modal-buy-coin__detail">
+            <span class="modal-buy-coin__span">Amount</span>: {{ amount }}
           </p>
         </div>
         <form
@@ -34,7 +37,7 @@
               <input
                 type="number"
                 formControlName="amount"
-                placeholder="Enter a quantity"
+                placeholder="Enter a quantity to buy"
                 class="modal-buy-coin__input"
                 (input)="checkInputValue()"
               />

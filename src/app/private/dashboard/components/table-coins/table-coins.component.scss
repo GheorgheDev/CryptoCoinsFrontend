@@ -11,32 +11,6 @@
     background-color: #424242;
     padding: 0.8rem;
     box-sizing: border-box;
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-  }
-
-  &__wallet-user {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    font-size: 1.2em;
-    color: white;
-  }
-
-  &__button-increase-wallet {
-    border-radius: 50%;
-    aspect-ratio: 1 / 1;
-    border: none;
-    cursor: pointer;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &:hover {
-      background-color: rgb(154, 154, 154);
-    }
   }
 
   &__table {

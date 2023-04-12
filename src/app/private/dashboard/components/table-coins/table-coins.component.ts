@@ -22,8 +22,7 @@ export class TableCoinsComponent implements OnInit, OnChanges {
   @Input() loggedUser: User;
   @Input() loggedUserId: string;
 
-  @Output() onOpenModalBuyCoin = new EventEmitter<string>();
-  @Output() onOpenModalIncreaseWallet = new EventEmitter<void>();
+  @Output() onOpenModalBuyCoin = new EventEmitter<DatasetSellButton>();
   @Output() onOpenModalSellCoin = new EventEmitter<DatasetSellButton>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -60,10 +59,6 @@ export class TableCoinsComponent implements OnInit, OnChanges {
       })
   }
 
-  openModalIncreaseWallet() {
-    this.onOpenModalIncreaseWallet.emit();
-  }
-
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -75,7 +70,13 @@ export class TableCoinsComponent implements OnInit, OnChanges {
 
   openModalBuyCoin(event: Event) {
     const coindId = (event.target as HTMLButtonElement).dataset.coinid as string;
-    this.onOpenModalBuyCoin.emit(coindId);
+    const amount = (event.target as HTMLButtonElement).dataset.amount as string;
+    this.onOpenModalBuyCoin.emit(
+      {
+        coin_id: coindId,
+        amount: amount
+      }
+    );
   }
 
   openModalSellCoin(event: Event) {
