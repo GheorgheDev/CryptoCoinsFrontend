@@ -13,6 +13,6 @@ export class RegisterService {
   ) { }
 
   registerUser(newUser: User): Observable<string> {
-    return this.http.post<string>('/api/users/create', { newUser });
+    return this.http.post<string>('/api/users/create/user', { newUser });
   }
 }
