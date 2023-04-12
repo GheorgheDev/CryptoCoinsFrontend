@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { User } from 'src/app/shared/interfaces/user.interface';
 import { Coin } from 'src/app/shared/interfaces/coin.interface';
 import { Sale } from 'src/app/shared/interfaces/sale.interface';
+import { UserCoins } from 'src/app/shared/interfaces/userCoins.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -19,22 +20,26 @@ export class DashboardService {
   }
 
   increaseWallet(user: User, wallet: number): Observable<number> {
-    return this.http.patch<number>('/api/users/increase-wallet', { user, wallet });
+    return this.http.patch<number>('/api/users/increase-wallet/user', { user, wallet });
   }
 
-  getAllCoinsWithUserCoins(userId: string): Observable<Coin[]> {
-    return this.http.get<Coin[]>(`/api/coins/get/all/${userId}`);
+  getAllCoins(): Observable<Coin[]> {
+    return this.http.get<Coin[]>(`/api/coins/get/all`);
+  }
+
+  getAllUserCoins(userId: string): Observable<UserCoins[]> {
+    return this.http.get<UserCoins[]>(`/api/user-coins/get/${userId}`);
   }
 
   getCoinById(coinId: string): Observable<Coin> {
-    return this.http.get<Coin>(`/api/coins/get/${coinId}`);
+    return this.http.get<Coin>(`/api/coins/get/coin/${coinId}`);
   }
 
   buyCoins(buy: Sale): Observable<number> {
-    return this.http.post<number>('/api/user-coins/add', { newUserCoins: buy });
+    return this.http.post<number>('/api/user-coins/buy/coins', { coinsToBuy: buy });
   }
 
-  sellCoins(buy: Sale): Observable<number> {
-    return this.http.post<number>('/api/user-coins/delete', { userCoins: buy });
+  sellCoins(sale: Sale): Observable<number> {
+    return this.http.post<number>('/api/user-coins/sell/coins', { coinsToSell: sale });
   }
 }
